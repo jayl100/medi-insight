@@ -3,12 +3,14 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev:server": "cd server && nodemon index.js",
+    "dev:client": "cd client && vite",
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\""
   },
   "author": "",
   "license": "MIT",
   "description": "",
   "dependencies": {
-    "express": "^5.1.0"
+    "concurrently": "^9.1.2"
   }
 }
