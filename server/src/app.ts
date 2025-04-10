@@ -1,4 +1,7 @@
 import express, { Express, Request, Response } from 'express';
+import hospitalRouter from './routes/hospitalRouter';
+import favoriteRouter from './routes/favoriteRouter';
+import userRouter from './routes/userRouter';
 
 const app: Express = express();
 const port = process.env.PORT;
@@ -17,3 +20,7 @@ app.get('/', (req: Request, res: Response) => {
 app.listen(app.get('port'), () => {
   console.log(`server is running on → ${app.get('host')}:${app.get('port')}`)
 })
+
+app.use('/hospitals', hospitalRouter);
+app.use('/favorites', favoriteRouter);
+app.use('/users', userRouter);
