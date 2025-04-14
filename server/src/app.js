@@ -1,13 +1,13 @@
 import dotenv from 'dotenv';
 dotenv.config();
-import express, { Express, Request, Response } from 'express';
+import express from 'express';
 
-import hospitalRouter from './routes/hospitalRouter';
-import favoriteRouter from './routes/favoriteRouter';
-import userRouter from './routes/userRouter';
-import sequelize from "../models";
+import hospitalRouter from './routes/hospitalRouter.js';
+import favoriteRouter from './routes/favoriteRouter.js';
+import userRouter from './routes/userRouter.js';
+import db from "../models/index.js";
 
-const app: Express = express();
+const app = express();
 const port = process.env.PORT;
 const host = process.env.HOST;
 
@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: false }));
 
 (async() => {
   try {
-    await sequelize.authenticate();
+    await db.sequelize.authenticate();
     // await db.sequelize.sync({force: true});
     console.log('DB connection successful');
   } catch (err) {
