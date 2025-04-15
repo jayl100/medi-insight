@@ -1,24 +1,25 @@
 {
   "name": "medi-insight-server",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "app.js",
   "type": "module",
   "scripts": {
     "start": "node dist/app.js",
-    "build": "tsc -p .",
-    "dev": "nodemon --watch \"src/**/*.ts\" --exec \"node --experimental-specifier-resolution=node --loader ts-node/esm\" src/app.ts"
+    "dev": "nodemon --watch 'src/**/*.js' --exec 'node --experimental-specifier-resolution=node' src/app.js"
   },
   "author": "",
   "license": "MIT",
   "description": "",
   "dependencies": {
+    "dotenv": "^16.5.0",
+    "mysql2": "^3.14.0",
+    "sequelize": "^6.37.7",
+    "sequelize-cli": "^6.6.2",
+    "sqlite3": "^5.1.7",
     "typescript": "^5.8.3"
   },
   "devDependencies": {
-    "@types/express": "^5.0.1",
-    "@types/node": "^22.14.0",
     "express": "^5.1.0",
-    "nodemon": "^3.1.9",
-    "ts-node": "^10.9.2"
+    "nodemon": "^3.1.9"
   }
 }
