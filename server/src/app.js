@@ -6,6 +6,8 @@ import hospitalRouter from './routes/hospitalRouter.js';
 import favoriteRouter from './routes/favoriteRouter.js';
 import userRouter from './routes/userRouter.js';
 import db from "../models/index.js";
+import deviceRouter from './routes/deviceRouter.js';
+import regionRouter from './routes/regionRouter.js';
 
 const app = express();
 const port = process.env.PORT;
@@ -35,3 +37,5 @@ app.listen(app.get('port'), () => {
 app.use('/hospitals', hospitalRouter);
 app.use('/favorites', favoriteRouter);
 app.use('/users', userRouter);
+app.use('/devices', deviceRouter);
+app.use('/regions', regionRouter);
