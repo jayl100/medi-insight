@@ -13,6 +13,14 @@ export default (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      HospitalDevice.belongsTo(models.Hospital, {
+        foreignKey: 'hospital_id',
+        targetKey: 'id',
+      })
+      HospitalDevice.belongsTo(models.Device, {
+        foreignKey: 'device_id',
+        targetKey: 'id',
+      })
     }
   }
 
@@ -30,6 +38,8 @@ export default (sequelize, DataTypes) => {
     sequelize,
     modelName: 'HospitalDevice',
     tableName: 'hospital_devices',
+    charset: 'utf8',
+    collate: 'utf8_general_ci',
   });
   return HospitalDevice;
 };

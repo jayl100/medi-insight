@@ -1,11 +1,11 @@
 'use strict';
 
 import {
-  Model,
-} from "sequelize";
+  Model, Sequelize,
+} from 'sequelize';
 
 export default (sequelize, DataTypes) => {
-  class Device extends Model {
+  class Region extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -13,20 +13,15 @@ export default (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Device.hasMany(models.HospitalDevice, {
-        foreignKey: 'device_id',
-        sourceKey: 'id',
-        onDelete: 'CASCADE',
-      })
-      Device.hasMany(models.HospitalDeviceStandard, {
-        foreignKey: 'device_id',
-        sourceKey: 'id',
-        onDelete: 'CASCADE',
+      Region.hasMany(models.District, {
+        foreignKey: 'region_id',
+        targetKey: 'id',
+        onDelete: 'SET NULL',
       })
     }
   }
 
-  Device.init({
+  Region.init({
     id: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -34,15 +29,12 @@ export default (sequelize, DataTypes) => {
       primaryKey: true,
     },
     name: DataTypes.STRING,
-    code: {
-      type: DataTypes.STRING,
-      unique: true,
-    },
   }, {
     sequelize,
-    modelName: 'Device',
-    tableName: 'devices',
+    modelName: 'Region',
+    tableName: 'regions',
     charset: 'utf8',
     collate: 'utf8_general_ci',
-  });  return Device;
+  });
+  return Region;
 };

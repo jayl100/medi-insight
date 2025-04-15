@@ -13,6 +13,11 @@ export default (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      User.hasMany(models.Favorite, {
+        foreignKey: 'user_id',
+        sourceKey: 'id',
+        onDelete: 'CASCADE',
+      })
     }
   }
 
@@ -22,16 +27,16 @@ export default (sequelize, DataTypes) => {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
+      unique: true,
     },
     email: DataTypes.STRING,
-    created_at: {
-      type: DataTypes.DATE,
-      defaultValue: Sequelize.NOW,
-    },
   }, {
     sequelize,
+    timestamps: true,
     modelName: 'User',
     tableName: 'users',
+    charset: 'utf8',
+    collate: 'utf8_general_ci',
   });
   return User;
 };

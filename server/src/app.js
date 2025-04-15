@@ -21,7 +21,7 @@ app.use(express.urlencoded({ extended: false }));
 (async() => {
   try {
     await db.sequelize.authenticate();
-    // await db.sequelize.sync({force: true});
+    await db.sequelize.sync({force: true});
     console.log('DB connection successful');
   } catch (err) {
     console.error(err);

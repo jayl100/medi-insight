@@ -13,6 +13,14 @@ export default (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Favorite.belongsTo(models.User, {
+        foreignKey: 'user_id',
+        targetKey: 'id',
+      })
+      Favorite.belongsTo(models.Hospital, {
+        foreignKey: 'hospital_id',
+        targetKey: 'id',
+      })
     }
   }
 
@@ -23,13 +31,21 @@ export default (sequelize, DataTypes) => {
       autoIncrement: true,
       primaryKey: true,
     },
-    user_id: DataTypes.INTEGER,
-    hospital_id: DataTypes.INTEGER,
+    user_id: {
+      type: DataTypes.INTEGER,
+      unique: true,
+    },
+    hospital_id: {
+      type: DataTypes.INTEGER,
+      unique: true,
+    },
     favorite: DataTypes.BOOLEAN,
   }, {
     sequelize,
     modelName: 'Favorite',
     tableName: 'favorites',
+    charset: 'utf8',
+    collate: 'utf8_general_ci',
   });
   return Favorite;
 };

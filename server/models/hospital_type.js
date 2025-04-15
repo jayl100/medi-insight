@@ -13,6 +13,15 @@ export default (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      HospitalType.hasMany(models.Hospital, {
+        foreignKey: 'hospital_type_id',
+        sourceKey: 'id',
+      })
+      HospitalType.hasMany(models.HospitalDeviceStandard, {
+        foreignKey: 'hospital_type_id',
+        sourceKey: 'id',
+        onDelete: 'CASCADE',
+      })
     }
   }
 
@@ -28,6 +37,8 @@ export default (sequelize, DataTypes) => {
     sequelize,
     modelName: 'HospitalType',
     tableName: 'hospital_types',
+    charset: 'utf8',
+    collate: 'utf8_general_ci',
   });
   return HospitalType;
 };

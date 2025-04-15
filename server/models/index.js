@@ -51,7 +51,7 @@ for (const file of modelFiles) {
   const moduleUrl = pathToFileURL(filePath).href;
 
   const modelModule = await import(moduleUrl);
-  const model = modelModule.default(sequelize, Sequelize); // ESM 스타일로 export default 되어야 함
+  const model = modelModule.default(sequelize, DataTypes); // ESM 스타일로 export default 되어야 함
   db[model.name] = model;
 }
 

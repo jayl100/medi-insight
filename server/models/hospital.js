@@ -13,6 +13,24 @@ export default (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+     Hospital.belongsTo(models.HospitalType, {
+       foreignKey: 'hospital_type_id',
+       targetKey: 'id',
+     })
+      Hospital.belongsTo(models.District, {
+        foreignKey: 'district_id',
+        targetKey: 'id',
+      })
+      Hospital.hasMany(models.Favorite, {
+        foreignKey: 'hospital_id',
+        sourceKey: 'id',
+        onDelete: 'CASCADE',
+      })
+      Hospital.hasMany(models.HospitalDevice, {
+        foreignKey: 'hospital_id',
+        sourceKey: 'id',
+        onDelete: 'CASCADE',
+      })
     }
   }
 
@@ -25,20 +43,19 @@ export default (sequelize, DataTypes) => {
     },
     name: DataTypes.STRING,
     address: DataTypes.STRING,
-    type: DataTypes.STRING,
-    region: DataTypes.STRING,
-    district: DataTypes.STRING,
+    hospital_type_id: DataTypes.INTEGER,
+    district_id : DataTypes.INTEGER,
     operating_day: DataTypes.STRING,
     phone: DataTypes.STRING,
     doctor_quantity: DataTypes.INTEGER,
-    latitude: DataTypes.STRING,
-    longitude: DataTypes.STRING,
-    cluster_id: DataTypes.INTEGER,
-    region_code: DataTypes.INTEGER,
+    lat: DataTypes.FLOAT,
+    lng: DataTypes.FLOAT,
   }, {
     sequelize,
     modelName: 'Hospital',
     tableName: 'hospitals',
+    charset: 'utf8',
+    collate: 'utf8_general_ci',
   });
   return Hospital;
 };
