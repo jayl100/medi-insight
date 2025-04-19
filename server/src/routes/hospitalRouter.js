@@ -1,10 +1,11 @@
 import express from 'express';
-import { getDetail, getList } from '../controllers/hospitalController.js';
+import { getHospitalDetail, getHospitalList, getHospitalType } from '../controllers/hospitalController.js';
 
 const router = express.Router();
 
 // hospital
-router.get('/', getList);
-router.get('/:id', getDetail);
+router.get('/', getHospitalList);
+router.get('/type', getHospitalType);
+router.get('/:id', getHospitalDetail);
 
 export default router;
