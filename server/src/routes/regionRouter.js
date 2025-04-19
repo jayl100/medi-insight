@@ -1,6 +1,5 @@
 import express from 'express';
-import { deleteFavorite, postFavorite } from '../controllers/favoriteController.js';
-import { getDistrict, getRegion } from '../controllers/regionController.js';
+import { getDistrictsByRegion, getRegion } from '../controllers/regionController.js';
 
 const router = express.Router();
 
@@ -8,6 +7,6 @@ const router = express.Router();
 router.get('/', getRegion);
 
 // district
-router.get('/', getDistrict);
+router.get('/:regionId/districts', getDistrictsByRegion);
 
 export default router;
