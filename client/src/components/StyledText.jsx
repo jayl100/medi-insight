@@ -26,7 +26,7 @@ export const Text = styled.p`
   font-weight: normal;
 `;
 
-export const btn = styled.a`
+export const Btn = styled.a`
     display: inline-flex;
     width: 178px;
     height: 57px;
@@ -36,4 +36,32 @@ export const btn = styled.a`
     justify-content: center;
     font-weight: 700;
     font-size: 22px;
+    transition: all 0.2s ease;
+    border: 1px solid #00CDCD;
+     &:hover {
+        background-color: #F5FFFF;
+        color: #00CDCD;
+        
+  }
 `;
+
+// Table
+export const Table = styled.div`
+    div.total-wrapper {
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        height: 50px;
+    }
+
+      p {
+        font-weight: 700;
+        font-size: 22px;
+        &.total {
+          font-weight: 400;
+          font-size: 14px;
+        }
+      }
+`

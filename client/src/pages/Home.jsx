@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Cluster from '../components/Cluster'; 
 import Filter from '../components/Filter'; 
-import { MainTitleWrapper, MainSubTitle, MainTitle, Text } from '../components/StyledText'; // styled-components 가져오기
+import { MainTitleWrapper, MainSubTitle, MainTitle, Text, Btn } from '../components/StyledText'; // styled-components 가져오기
 
 const clusters = [
     {
@@ -42,7 +42,7 @@ const Home = () => {
             </MainTitleWrapper>
             <div className='main-option'>
                 <Text>클러스터별로 병원보기</Text>
-                <div className='inner'>
+                <div className='option-box'>
                     {clusters.map((c, i) => (<Cluster key={i} title={c.title} items={c.items}/>))}
                 </div>
             </div>
@@ -50,7 +50,7 @@ const Home = () => {
                 <Text>일반필터링</Text>
                 {filters.map((c, i) => (<Filter key={i} title={c.title} items={c.items}/>))}
             </div>
-            <btn>검색</btn>
+            <Btn>검색</Btn>
         </section>
     );
 };
