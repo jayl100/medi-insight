@@ -37,7 +37,6 @@ function HospitalDetail() {
           ))}
           </tbody>
         </table>
-
       </div>
     </div>
   );

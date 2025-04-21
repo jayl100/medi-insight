@@ -2,12 +2,12 @@ import styled from 'styled-components';
 import useHospital from '../hooks/useHospital.jsx';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import HospitalList from '../components/common/hospital/HospitalList.jsx';
+import HospitalList from '../components/hospital/HospitalList.jsx';
 
 function Hospital({ className }) {
   const navigate = useNavigate();
   const { isMeta, isHospitals, fetchHospitals } = useHospital();
-  console.log(isHospitals);
+
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const page = parseInt(params.get('page') || '1', 10);
