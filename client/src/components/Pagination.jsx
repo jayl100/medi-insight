@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 function Pagination() {
   return (
-    <PaginationStyle>
+    <PaginationStyled>
       <button>
         <RiArrowLeftDoubleFill />
       </button>
@@ -21,15 +21,15 @@ function Pagination() {
       <button>
         <RiArrowRightDoubleFill />
       </button>
-    </PaginationStyle>
+    </PaginationStyled>
   );
 }
 
-const PaginationStyle = styled.div`
+const PaginationStyled = styled.div`
   width: 100%;
 `
 
-const SvgStyle = styled.svg`
+const SvgStyled = styled.svg`
   font-weight: 500;
 `
 

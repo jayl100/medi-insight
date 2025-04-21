@@ -41,13 +41,13 @@ function HospitalList({ hospitals, total }) {
   );
 }
 
-const TableStyled = styled.table`
+export const TableStyled = styled.table`
     width: 100%;
     table-layout: fixed;
     border-collapse: collapse;
 `;
 
-const TheadStyled = styled.thead`
+export const TheadStyled = styled.thead`
     width: 100%;
     border-top: 1px solid #222222;
     border-bottom: 1px solid #222222;
@@ -80,16 +80,17 @@ const ThDevicesStyled = styled(ThStyled)`
 `;
 
 const TrStyled = styled.tr`
+    border-bottom: 1px solid #d9d9d9;
+
     &:hover {
         background-color: #f9f9f9;
     }
 `
 
-const TdStyled = styled.td`
+export const TdStyled = styled.td`
     padding: 1rem;
     text-align: left;
     line-height: 1.6;
-    border-bottom: 1px solid #d9d9d9;
     cursor: pointer;
 `;
 
@@ -100,7 +101,7 @@ const TdDevicesStyled = styled(TdStyled)`
     align-items: flex-start;
 `;
 
-const DevicesChipStyled = styled.div`
+export const DevicesChipStyled = styled.div`
     width: fit-content;
     border-radius: 20px;
     background-color: #F5FFFF;
