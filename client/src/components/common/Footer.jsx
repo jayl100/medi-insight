@@ -11,7 +11,7 @@ function Footer() {
                 <img src={mediFooterLogo} className="logo" alt="medi logo" />
               </a>
               <div className="copy">
-                <Copy>© 2025 MediInsight. All Rights Reserved.</Copy>
+                <CopyStyled>© 2025 MediInsight. All Rights Reserved.</CopyStyled>
                 <a href="https://github.com/jayl100/medi-insight" target="_blank">GitHub</a>
               </div>
             </div>
@@ -21,7 +21,7 @@ function Footer() {
   );
 }
 
-const Copy = styled.p`
+const CopyStyled = styled.p`
     font-weight: 400;
 `;
 
