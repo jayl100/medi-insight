@@ -1,0 +1,44 @@
+services:
+  db:
+    image: mysql:latest
+    container_name: medi-db
+    restart: always
+    ports:
+      - '${MYSQL_PORT}:3306'
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+    volumes:
+      - db-data:/var/lib/mysql
+
+
+  backend:
+    build: ./server
+    container_name: medi-api-server
+    volumes:
+      - ./server:/app
+      - /app/node_modules # node_modules는 로컬과 공유하지 않음
+    ports:
+      - '${BACKEND_PORT}:3000'
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_PORT: ${DB_PORT}
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+    command: npm run dev
+
+  frontend:
+    build: ./client
+    container_name: medi-api-front
+    volumes:
+      - ./client:/app
+      - /app/node_modules
+    ports:
+      - '${FRONTEND_PORT}:5173'
+    command: npm run dev
+
+volumes:
+  db-data:

@@ -1,3 +1,4 @@
+
 import {useState} from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
 import mediLogo from './assets/logo.svg';
@@ -9,6 +10,10 @@ import Hospitals from './pages/Hospitals';
 
 import {ThemeProvider} from 'styled-components';
 import styled from "styled-components";
+import router from './routes/Route.jsx';
+import { RouterProvider } from 'react-router-dom';
+import Header from './components/common/Header.jsx';
+import Hospital from './pages/Hospital.jsx';
 
 
 const theme = {
@@ -73,8 +78,8 @@ function App() {
 
                 </footer>
             </div>
+          <RouterProvider router={ router } />
         </ThemeProvider>
-
     )
 }
 

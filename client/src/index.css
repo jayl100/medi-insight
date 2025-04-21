@@ -56,6 +56,7 @@ button:focus-visible {
 }
 
 @media (prefers-color-scheme: light) {
+
     :root {
         color: #213547;
         background-color: #ffffff;
@@ -122,3 +123,4 @@ footer .copy a {
     font-weight: 700;
     border-bottom: 2px solid #fff;
 }
+
