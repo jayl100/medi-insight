@@ -70,13 +70,6 @@ button:focus-visible {
 }
 
 #root section,
-.inner {
-    max-width: 1280px;
-    margin: 0 auto;
-}
-.App-header {
-  border-bottom: 1px solid #D9D9D9;
-}
 .App-header .inner {
     display: flex;
     flex-wrap: nowrap;

@@ -7,7 +7,7 @@ import HospitalDetail from '../pages/HospitalDetail.jsx';
 const routeList = [
   {
     path: '/',
-    element: <Home />,
+    element: <Hospital />,
   },
   {
     path: '/hospitals',

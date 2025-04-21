@@ -18,6 +18,7 @@ function Container({ child }) {
 const ContainerStyled = styled.div`
     max-width: 1280px;
     margin: 0 auto;
+    padding-top: 6rem;
 `;
 
 export default Container;

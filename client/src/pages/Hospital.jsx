@@ -3,6 +3,7 @@ import useHospital from '../hooks/useHospital.jsx';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import HospitalList from '../components/hospital/HospitalList.jsx';
+import Pagination from '../components/Pagination.jsx';
 
 function Hospital({ className }) {
   const navigate = useNavigate();
@@ -21,8 +22,9 @@ function Hospital({ className }) {
 
   return (
     <ListStyled className={className}>
-      <h1>Hospitals</h1>
+      <TitleStyled>Hospitals</TitleStyled>
       <HospitalList hospitals={isHospitals}/>
+      {/*<Pagination/>*/}
     </ListStyled>
   );
 }
@@ -30,5 +32,9 @@ function Hospital({ className }) {
 const ListStyled = styled.div`
 
 `;
+
+const TitleStyled = styled.h1`
+  margin-bottom: 4rem;
+`
 
 export default Hospital;
