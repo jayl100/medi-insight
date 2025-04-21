@@ -1,5 +1,5 @@
 import { getHospitalDetail, getHospitalList } from '../api/hospital.api.js';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
 const useHospital = () => {
   const [isHospitals, setIsHospitals] = useState([]);
@@ -11,7 +11,7 @@ const useHospital = () => {
     currentPage: 1,
   });
 
-  const fetchHospitals = async (page, limit) => {
+  const fetchHospitals = useCallback( async (page, limit) => {
     try {
       const res = await getHospitalList(page, limit);
       setIsHospitals(res.data);
@@ -20,7 +20,7 @@ const useHospital = () => {
     } catch (err) {
       console.error(err);
     }
-  }
+  }, [])
 
   const fetchHospitalDetail = async (id) => {
     try {
