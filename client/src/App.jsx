@@ -1,8 +1,9 @@
-import {useState} from 'react';
-import mediLogo from './assets/logo.svg';
-import Home from './pages/Home';
 import { ThemeProvider } from 'styled-components';
 import styled from "styled-components";
+import router from './routes/Route.jsx';
+import { RouterProvider } from 'react-router-dom';
+import Header from './components/common/Header.jsx';
+import Hospital from './pages/Hospital.jsx';
 
 const theme = {
   colors: {
@@ -19,29 +20,10 @@ const Text = styled.p`
 function App() {
     
     return (
-  
         <ThemeProvider theme={theme}>
-          <div className = 'App' > 
-            <header className='App-header'>
-              <a href="#">
-                  <img src={mediLogo} className="logo" alt="medi logo"/>
-              </a>
-              <ul className='nav'>
-                  <li>
-                      <a href="">Hospitals</a>
-                  </li>
-                  <li>
-                      <a href="">Bookmark</a>
-                  </li>
-                  <li>
-                      <a href="">Logout</a>
-                  </li>
-              </ul>
-            </header>
-            <Home/>
-          </div>
-        </ThemeProvider>        
-     
+          <Header />
+          <RouterProvider router={ router } />
+        </ThemeProvider>
     )
 }
 

@@ -12,7 +12,7 @@
   "description": "",
   "dependencies": {
     "concurrently": "^9.1.2",
-    "styled-components": "^6.1.17"
+    "styled-components": "^6.1.17",
     "express-generator": "^4.16.1"
   }
 }
