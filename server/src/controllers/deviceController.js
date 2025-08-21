@@ -3,7 +3,7 @@ import StatusCodes from 'http-status-codes';
 
 export const getDevice = async(req, res, next) => {
   try {
-    const devices = await db.Device.findAll();
+    const devices = await db.Device.findAll({ attributes: [ 'id', 'name' ] });
     res.status(StatusCodes.OK).json({
       data: devices
     });

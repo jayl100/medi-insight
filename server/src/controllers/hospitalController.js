@@ -25,7 +25,6 @@ export const getHospitalDetail = async(req, res, next) => {
   try {
     const { id } = req.params;
     const detail = await getHospitalDetailService(id);
-
     return res.status(StatusCodes.OK).json({
       data: detail,
     });

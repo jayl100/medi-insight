@@ -4,6 +4,7 @@ import StatusCodes from 'http-status-codes';
 import { buildDeviceStandardsMap } from '../../utils/deviceMapper.js';
 import { buildHospitalQuery } from '../../utils/buildHospitalQuery.js';
 import { commonPagination } from '../../utils/commonPagination.js';
+import { Op } from 'sequelize';
 
 export async function getHospitalDetailService(id) {
   const hospital = await db.Hospital.findByPk(id, {
@@ -30,10 +31,10 @@ export async function getHospitalDetailService(id) {
       ]
     }),
     db.HospitalDeviceStandard.findAll({
-      where: { hospital_type_id: typeId},
+      where: { hospital_type_id: typeId },
       attributes: ['device_id', 'expected_quantity']
     })
-  ])
+  ]);
 
   const standardMap = buildDeviceStandardsMap(standards);
 
@@ -67,6 +68,21 @@ export async function getHospitalListService(query) {
   });
   const meta = getMeta(count);
 
+  const hospitalIds = rows.map(h => h.id);
+  let deviceMap = {};
+  if (hospitalIds.length > 0) {
+    const allDevices = await db.HospitalDevice.findAll({
+      where: { hospital_id: { [Op.in]: hospitalIds } },
+      include: [{ model: db.Device, attributes: ['name'] }],
+    });
+
+    deviceMap = allDevices.reduce((m, hd) => {
+      if (!m[hd.hospital_id]) m[hd.hospital_id] = [];
+      if (hd.Device?.name) m[hd.hospital_id].push(hd.Device.name);
+      return m;
+    }, {});
+  }
+
   const data = rows.map((hospital) => {
     const plain = hospital.get({ plain: true });
 
@@ -74,7 +90,7 @@ export async function getHospitalListService(query) {
       id: plain.id,
       name: plain.name,
       type_name: plain.HospitalType?.name,
-      devices: (plain.HospitalDevices ?? []).map((device) => device.Device?.name).filter(Boolean),
+      devices: deviceMap[plain.id] ?? [],
       district_name: plain.District?.name,
       region_name: plain.District?.Region?.name,
     };

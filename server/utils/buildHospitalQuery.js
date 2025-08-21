@@ -2,7 +2,13 @@ import db from '../models/index.js';
 import { Op } from 'sequelize';
 
 export function buildHospitalQuery(query) {
-  const { type, region } = query;
+  const { type, region, device } = query;
+  const deviceIdRaw = query.device_id;
+  const deviceNameRaw = query.device;
+
+  const deviceIds = toArrayInt(deviceIdRaw);
+  const deviceNames = toArray(deviceNameRaw);
+
   const include = [];
 
   if (type) {
@@ -38,17 +44,33 @@ export function buildHospitalQuery(query) {
     });
   }
 
+  const hasDeviceId = deviceIds.length > 0;
+  const hasDeviceName = deviceNames.length > 0;
+
   include.push({
     model: db.HospitalDevice,
-    attributes: ['quantity'],
+    attributes: [],
+    required: !!device,
     include: [{
       model: db.Device,
-      attributes: ['name'],
+      attributes: [],
+      ...(hasDeviceName && { where: { name: { [Op.in]: deviceNames } } })
     }],
-    required: false,
+    ...(hasDeviceId && { where: { name: { [Op.in]: deviceIds } } }),
   });
 
   return { include };
 }
 
-const toArray = (v => [].concat(v ?? []));
+const toArray = (v) => {
+  if (Array.isArray(v)) return v;
+  if (typeof v === 'string') return v.split(',').map(s => s.trim()).filter(Boolean);
+  return [];
+};
+
+const toArrayInt = (v) => {
+  const arr = toArray(v);
+  return arr
+    .map(x => parseInt(x, 10))
+    .filter(n => Number.isInteger(n) && n > 0);
+};
