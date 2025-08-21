@@ -9,12 +9,7 @@ import {
 export const getHospitalList = async(req, res, next) => {
   try {
     const { data, meta } = await getHospitalListService(req.query);
-
-    if (data.length > 0) {
-      return res.status(StatusCodes.OK).json({ data, meta });
-    }
-
-    return res.status(StatusCodes.OK).json([]);
+    return res.status(StatusCodes.OK).json({ data, meta });
 
   } catch (err) {
     next(err);

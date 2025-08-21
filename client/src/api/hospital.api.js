@@ -1,13 +1,13 @@
 import requestHandler from './http.js';
 
-export const getHospitalList = async(page, limit, { deviceIds, region } = {}) => {
+export const getHospitalList = async(page, limit, { device, region } = {}) => {
   const params = new URLSearchParams();
   params.set('page', page);
   params.set('limit', limit);
-  if (Array.isArray(deviceIds)) {
-    deviceIds.forEach(id => Number.isInteger(id) && params.append('device_id', String(id)));
-  } else if (Number.isInteger(deviceIds)) {
-    params.set('device_id', String(deviceIds));
+  if (Array.isArray(device)) {
+    device.forEach(id => Number.isInteger(id) && params.append('device', String(id)));
+  } else if (Number.isInteger(device)) {
+    params.set('device', String(device));
   }
   // region
   if (region && region.trim()) {

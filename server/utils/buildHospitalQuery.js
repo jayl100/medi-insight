@@ -3,11 +3,7 @@ import { Op } from 'sequelize';
 
 export function buildHospitalQuery(query) {
   const { type, region, device } = query;
-  const deviceIdRaw = query.device_id;
-  const deviceNameRaw = query.device;
-
-  const deviceIds = toArrayInt(deviceIdRaw);
-  const deviceNames = toArray(deviceNameRaw);
+  const deviceIds = toArrayInt(device);
 
   const include = [];
 
@@ -45,21 +41,18 @@ export function buildHospitalQuery(query) {
   }
 
   const hasDeviceId = deviceIds.length > 0;
-  const hasDeviceName = deviceNames.length > 0;
-
   include.push({
     model: db.HospitalDevice,
     attributes: [],
-    required: !!device,
+    required: hasDeviceId,
     include: [{
       model: db.Device,
       attributes: [],
-      ...(hasDeviceName && { where: { name: { [Op.in]: deviceNames } } })
+      ...(hasDeviceId && { where: { id: { [Op.in]: deviceIds } } }),
     }],
-    ...(hasDeviceId && { where: { name: { [Op.in]: deviceIds } } }),
   });
 
-  return { include };
+  return { include, subQuery: false };
 }
 
 const toArray = (v) => {

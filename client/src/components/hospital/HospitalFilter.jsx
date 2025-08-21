@@ -4,7 +4,7 @@ import useHospital from '../../hooks/useHospital.jsx';
 
 function HospitalFilter({ location, onSelectDevice, onSelectRegion, hospitals }) {
   const params = new URLSearchParams(location.search);
-  const selectedIds = params.getAll('device_id').map(v => parseInt(v, 10)).filter(Number.isInteger);
+  const selectedIds = params.getAll('device').map(v => parseInt(v, 10)).filter(Number.isInteger);
   const selectedRegion = params.get('region') || '전체';
   const { isDevices, fetchDevicesList } = useHospital();
   const devices = isDevices.map(d => d)

@@ -15,26 +15,30 @@ function Hospital({ className }) {
     const params = new URLSearchParams(location.search);
     const page = parseInt(params.get('page') || '1', 10);
     const limit = parseInt(params.get('limit') || '10', 10);
-    const deviceIds = params.getAll('device_id').map(v => parseInt(v, 10))
+    const device = params.getAll('device').map(v => parseInt(v, 10));
     const region = params.get('region') || undefined;
 
-    fetchHospitals(page, limit, { deviceIds, region });
+    fetchHospitals(page, limit, { device, region });
   }, [location.search]);
 
 
-  const handlePageChange = (page, limit = 20) => {
-    navigate(`/hospitals?page=${page}&limit=${limit}`);
+  const handlePageChange = (page) => {
+    const p = new URLSearchParams(location.search);
+    const currentLimit = p.get('limit') || '10';
+    p.set('page', String(page));
+    p.set('limit', String(currentLimit));
+    navigate({ pathname: '/hospitals', search: p.toString() });
   };
 
   const selectDevice = (name) => {
     const p = new URLSearchParams(location.search);
     p.set('page', '1');
     if (!name || name === 'ALL') {
-      p.delete('device_id');
+      p.delete('device');
     } else {
-      p.set('device_id', name);
+      p.set('device', String(name));
     }
-    navigate({ pathname: '/hospitals', search: p.toString()});
+    navigate({ pathname: '/hospitals', search: p.toString() });
   };
 
   const selectRegion = (value) => {
@@ -45,8 +49,8 @@ function Hospital({ className }) {
     } else {
       p.set('region', value);
     }
-    navigate({ pathname: '/hospitals', search: p.toString()});
-  }
+    navigate({ pathname: '/hospitals', search: p.toString() });
+  };
 
   return (
     <ListStyled className={className}>
@@ -56,7 +60,7 @@ function Hospital({ className }) {
         onSelectDevice={selectDevice}
         onSelectRegion={selectRegion}
         hospitals={isHospitals}
-        />
+      />
       <HospitalList hospitals={isHospitals} />
       <PaginationWrapperStyled>
         <Pagination

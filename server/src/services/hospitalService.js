@@ -55,12 +55,15 @@ export async function getHospitalDetailService(id) {
 }
 
 export async function getHospitalListService(query) {
-  const { include } = buildHospitalQuery(query);
+  const { include, subQuery } = buildHospitalQuery(query);
   const { limit, offset, getMeta } = commonPagination(query);
   console.log('▶ pagination:', { page: query.page, limit, offset });
 
+  console.log(include);
+
   const { rows, count } = await db.Hospital.findAndCountAll({
     include,
+    subQuery,
     distinct: true,
     order: [['id', 'ASC']],
     limit,
